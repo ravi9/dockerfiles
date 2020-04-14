@@ -49,5 +49,5 @@ WORKDIR /root
 ENV INSTALL_DIR /opt/intel/openvino
 
 ENV PATH /opt/intel/openvino_2020.2.120/deployment_tools/model_optimizer:/opt/intel/openvino_2020.2.120/data_processing/gstreamer/bin:/opt/intel/openvino_2020.2.120/data_processing/gstreamer/bin/gstreamer-1.0:$PATH
-
 ENV LD_LIBRARY_PATH /opt/intel/openvino_2020.2.120/data_processing/dl_streamer/lib:/opt/intel/openvino_2020.2.120/data_processing/gstreamer/lib:/opt/intel/openvino_2020.2.120/opencv/lib:/opt/intel/openvino_2020.2.120/deployment_tools/ngraph/lib:/opt/intel/openvino_2020.2.120/deployment_tools/inference_engine/external/hddl/lib:/opt/intel/openvino_2020.2.120/deployment_tools/inference_engine/external/gna/lib:/opt/intel/openvino_2020.2.120/deployment_tools/inference_engine/external/mkltiny_lnx/lib:/opt/intel/openvino_2020.2.120/deployment_tools/inference_engine/external/tbb/lib:/opt/intel/openvino_2020.2.120/deployment_tools/inference_engine/lib/intel64:
+ENV PYTHONPATH /opt/intel/openvino_2020.2.120/python/python3.6:/opt/intel/openvino_2020.2.120/python/python3:/opt/intel/openvino_2020.2.120/deployment_tools/open_model_zoo/tools/accuracy_checker:/opt/intel/openvino_2020.2.120/deployment_tools/model_optimizer:/opt/intel/openvino_2020.2.120/data_processing/dl_streamer/python:/opt/intel/openvino_2020.2.120/data_processing/gstreamer/lib/python3.6/site-packages:
