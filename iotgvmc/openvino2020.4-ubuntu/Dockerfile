@@ -23,19 +23,13 @@ RUN apt install -y intel-openvino-dev-ubuntu18-2020.4.287
 
 RUN cd /opt/intel/openvino/deployment_tools/model_optimizer/ && \
     pip install -r requirements_tf.txt && \
-    pip uninstall tensorflow && \
+    pip uninstall -y tensorflow && \
     pip install tensorflow==1.15.3 && \
     pip install -r requirements_onnx.txt && \
     pip install -r requirements_mxnet.txt && \
     pip install ipython progress
 
-RUN source /opt/intel/openvino/bin/setupvars.sh
-
-RUN python3 -c "from openvino.inference_engine import IECore, get_version as get_ov_version; print('openvino version: ' + get_ov_version())"
-
-RUN python3 -c "from openvino.tools.benchmark.main import main"
-
-#python3 /opt/intel/openvino/deployment_tools/tools/benchmark_tool/benchmark_app.py -m './inceptionv3/IR_models/FP32/inceptionv3.xml' -nireq 1 -nstreams 1 -t 10
+RUN cd && rm -rf .cache
 
 RUN /bin/bash -c "echo 'source /opt/intel/openvino/bin/setupvars.sh' >> /root/.bashrc"
 
@@ -44,3 +38,7 @@ ENV PATH /opt/intel/openvino/deployment_tools/model_optimizer:/opt/intel/openvin
 ENV LD_LIBRARY_PATH /opt/intel/openvino/data_processing/dl_streamer/lib:/opt/intel/openvino/data_processing/gstreamer/lib:/opt/intel/openvino/opencv/lib:/opt/intel/openvino/deployment_tools/ngraph/lib:/opt/intel/openvino/deployment_tools/inference_engine/external/hddl/lib:/opt/intel/openvino/deployment_tools/inference_engine/external/gna/lib:/opt/intel/openvino/deployment_tools/inference_engine/external/mkltiny_lnx/lib:/opt/intel/openvino/deployment_tools/inference_engine/external/tbb/lib:/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64:
 
 ENV PYTHONPATH /opt/intel/openvino/python/python3.6:/opt/intel/openvino/python/python3:/opt/intel/openvino/deployment_tools/open_model_zoo/tools/accuracy_checker:/opt/intel/openvino/deployment_tools/model_optimizer:/opt/intel/openvino/data_processing/dl_streamer/python:/opt/intel/openvino/data_processing/gstreamer/lib/python3.6/site-packages:openvino_2020.2.120/data_processing/gstreamer/lib/python3.6/site-packages:
+
+RUN python3 -c "from openvino.inference_engine import IECore, get_version as get_ov_version; print('openvino version: ' + get_ov_version())"
+
+RUN python3 -c "from openvino.tools.benchmark.main import main"
