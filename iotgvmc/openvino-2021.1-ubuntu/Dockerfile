@@ -47,3 +47,4 @@ RUN python3 -c "from openvino.inference_engine import IECore, get_version as get
 
 RUN python3 -c "from openvino.tools.benchmark.main import main"
 
+WORKDIR /root
