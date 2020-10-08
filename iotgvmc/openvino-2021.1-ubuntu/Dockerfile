@@ -1,5 +1,8 @@
 FROM ubuntu:18.04
 
+ENV http_proxy=http://proxy-us.intel.com:911
+ENV https_proxy=http://proxy-us.intel.com:912
+
 RUN apt -y update
 RUN apt install -y software-properties-common \
                wget \
@@ -21,14 +24,14 @@ RUN apt-cache search openvino | grep 2021.1
 # apt install -y intel-openvino-runtime-ubuntu18-2021.1.110
 RUN apt install -y intel-openvino-dev-ubuntu18-2021.1.110
 
-RUN cd /opt/intel/openvino_2021/deployment_tools/model_optimizer/ && \
-    pip install -r requirements_tf.txt && \
-    pip install -r requirements_onnx.txt && \
-    pip install -r requirements_mxnet.txt && \
-    pip install mxnet -U && \
-    pip install tensorflow -U && \
-    pip install torch && \
-    pip install notebook progress tqdm matplotlib
+WORKDIR /opt/intel/openvino_2021/deployment_tools/model_optimizer/
+RUN pip install --no-cache-dir  -r requirements_tf.txt
+RUN pip install --no-cache-dir tensorflow -U
+RUN pip install --no-cache-dir -r requirements_onnx.txt
+RUN pip install --no-cache-dir -r requirements_mxnet.txt
+RUN pip install --no-cache-dir mxnet -U
+RUN pip install --no-cache-dir torch
+RUN pip install --no-cache-dir notebook progress tqdm matplotlib
 
 RUN cd && rm -rf .cache
 
