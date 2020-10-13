@@ -1,8 +1,5 @@
 FROM ubuntu:18.04
 
-ENV http_proxy=http://proxy-us.intel.com:911
-ENV https_proxy=http://proxy-us.intel.com:912
-
 RUN apt -y update
 RUN apt install -y software-properties-common \
                wget \
